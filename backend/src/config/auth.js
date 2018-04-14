@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const env = require('../.env')
 
 module.exports = (req, res, next) => {    
     if(req.method === 'OPTIONS'){
@@ -11,7 +10,7 @@ module.exports = (req, res, next) => {
             return res.status(401 ).send({errors: ['Não foi informado o token']})
         }
 
-        jwt.verify(token, env.authSecret, function(err, decoded){
+        jwt.verify(token, process.env.AUTH_SECRET, function(err, decoded){
             if(err){
                 return res.status(401).send({errors: ['Falha ao validar token.']})
             } else {

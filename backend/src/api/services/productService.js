@@ -1,4 +1,4 @@
-const Product = require('./product')
+const Product = require('../../models/product')
 const errorHandler = require('../common/errorHandler')
 
 Product.methods(['get', 'post', 'put', 'delete'])

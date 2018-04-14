@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const restful = require('node-restful')
+const mongoose = restful.mongoose
 
 const userSchema = new mongoose.Schema({
     userName: { type : String, required: true },
@@ -6,4 +7,4 @@ const userSchema = new mongoose.Schema({
     password: {type: String, min:6, max: 12, required: true }
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = restful.model('User', userSchema)

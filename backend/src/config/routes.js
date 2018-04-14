@@ -1,6 +1,6 @@
 const express = require('express')
 const auth = require('./auth')
-//var expressListRoutes   = require('express-list-routes')
+var expressListRoutes   = require('express-list-routes')
 
 module.exports = function(server){
     /*
@@ -13,20 +13,23 @@ module.exports = function(server){
 
     //const BillingCycle = require('../api/billingCycle/billingCycleService')
     //BillingCycle.register(protectedApi, '/billingCycles')
-    const Product = require('../api/product/productService')
-    Product.register(protectedApi, '/product')
+    const ProductService = require('../api/services/productService')
+    ProductService.register(protectedApi, '/product')
+
+    const UserService = require('../api/services/userService')
+    UserService.register(protectedApi, '/user')
     /*
      * Rotas Abertas
      */
     const openApi = express.Router()
     server.use('/oapi', openApi)
 
-    const AuthService = require('../api/user/authService')
+    const AuthService = require('../api/services/authService')
     openApi.post('/login', AuthService.login)
-    openApi.post('/signUp', AuthService.signUp)
+    //openApi.post('/signUp', AuthService.signUp)
     openApi.post('/validateToken', AuthService.validateToken)
 
-   // console.log("ROTAS:\n")
-   // expressListRoutes({ prefix: '/api' }, 'Protected API:', protectedApi)
-   // expressListRoutes({ prefix: '/oapi' }, 'Open API:', openApi)
+    console.log("ROTAS:\n")
+    expressListRoutes({ prefix: '/api' }, 'Protected API:', protectedApi)
+    expressListRoutes({ prefix: '/oapi' }, 'Open API:', openApi)
 }

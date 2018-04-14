@@ -1,4 +1,4 @@
-const port = 80
+const port = process.env.PORT || 3000
 
 const bodyParser = require('body-parser')
 const express = require('express')
@@ -6,14 +6,12 @@ const server = express()
 const allowCors = require('./cors')
 const queryParser = require('express-query-int')
 
-const Product = require('../api/product/product')
-
 server.use(bodyParser.urlencoded({ extended : true}))
 server.use(bodyParser.json())
 server.use(allowCors)
 server.use(queryParser())
 
-server.listen(process.env.PORT || port, () => {
+server.listen(port, () => {
     console.log(`BAKEND is running on port ${port}`)   
     /*var promise = Product.create({ 
         type: 1,

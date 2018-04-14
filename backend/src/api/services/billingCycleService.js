@@ -1,4 +1,4 @@
-const BillingCycle = require('./billingCycle')
+const BillingCycle = require('../../models/billingCycle')
 const errorHandler = require('../common/errorHandler')
 
 BillingCycle.methods(['get', 'post', 'put', 'delete'])
