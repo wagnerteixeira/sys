@@ -8,28 +8,32 @@ import classNames from 'classnames';
 
 const styles = theme => ({
   root: {
+    zIndex: 1,    
     flexGrow: 1,
-    position: 'absolute',    
-    bottom: `${theme.mixins.toolbar.minHeight + 8}px`,
-    width: "100%",
-  },
-  appBarFooter: {
-    zIndex: theme.zIndex.drawer + 4,
-  }  
+    //height:`${theme.mixins.toolbar.minHeight}px`,
+    height: theme.spacing.unit * 3,
+    backgroundColor: theme.palette.primary.main,
+    color : theme.palette.common.white,
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    left: 0,               
+  },  
+  typography: { 
+    position: 'relative',
+    top: theme.spacing.unit * 0.5
+  }
 });
 
 function Footer(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="absolute">
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            Title
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
+  const { classes, theme } = props;
+  console.log(theme.spacing.unit)
+  return (    
+    <footer className={classes.root}>      
+        <Typography className={classes.typography} align="center" variant="caption" color="inherit">          
+          © 2018 Wagner Bernardes Teixeira. Todos os direitos reservados.
+        </Typography>      
+    </footer>    
   );
 }
 

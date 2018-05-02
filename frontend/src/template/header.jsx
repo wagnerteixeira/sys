@@ -15,7 +15,11 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import Icon from 'material-ui/Icon';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import IconListButton from '../common/iconListButton'
+import { handleDrawer } from '../template/appActions'
 
 const drawerWidth = 300;
 
@@ -27,7 +31,7 @@ const styles = theme => ({
     position: 'absolute',
     display: 'flex',
     width: "100%",
-    height: `calc(100% - ${theme.mixins.toolbar.minHeight}px)`,
+    height: '100%',
    },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -54,7 +58,7 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
+    width: drawerWidth,    
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -77,41 +81,28 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     backgroundColor: theme.palette.primary.main,
-    color:  theme.palette.common.white,
+    color: theme.palette.common.white,
     ...theme.mixins.toolbar,
   },  
 });
 
 class Header extends React.Component {
-  state = {
-    open: false,
-  };
-
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
-
+  
   render() {
     const { classes, theme } = this.props;
-    console.log(theme)
-    console.log(classes.content)
-    console.log(`calc(100% - ${theme.mixins.toolbar.minHeight}px)`)
+    console.log(theme)    
     return (
       <div className={classes.root}>
         <AppBar
           position="absolute"
-          className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+          className={classNames(classes.appBar, this.props.app.drawerOpen && classes.appBarShift)}
         >
-          <Toolbar disableGutters={!this.state.open}>
+          <Toolbar disableGutters={!this.props.app.drawerOpen}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, this.state.open && classes.hide)}
+              onClick={() => this.props.handleDrawer(true)}
+              className={classNames(classes.menuButton, this.props.app.drawerOpen && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
@@ -120,23 +111,23 @@ class Header extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Drawer
+        <Drawer 
           variant="permanent"
           classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+            paper: classNames(classes.drawerPaper, !this.props.app.drawerOpen && classes.drawerPaperClose),
           }}
-          open={this.state.open}
+          open={this.props.app.drawerOpen}
         >
           <div className={classes.toolbar}>
-            <IconButton onClick={this.handleDrawerClose} color="inherit">
+            <IconButton onClick={() => this.props.handleDrawer(false) } color="inherit">
                <Icon color="inherit">chevron_left</Icon>
             </IconButton>
           </div>
           <Divider />
           <List>
-            <IconListButton iconType='insert_drive_file' onClickButton={this.clickList} primaryText='Cadastros de Produtos' listItemClassName={classes.listItemClassName} hideItemText={this.state.open}/>
-            <IconListButton iconType='person' onClickButton={this.clickList}  primaryText='Cadastro de Usuários' listItemClassName={classes.listItemClassName} hideItemText={this.state.open}/> 
-            <IconListButton iconType='add_circle' onClickButton={this.clickList}  primaryText='Texto primário' listItemClassName={classes.listItemClassName} hideItemText={this.state.open}/>
+            <IconListButton linkTo='/' iconType='insert_drive_file' onClickButton={this.clickList} primaryText='Cadastros de Produtos' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
+            <IconListButton linkTo='/user' iconType='person' onClickButton={this.clickList}  primaryText='Cadastro de Usuários' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/> 
+            <IconListButton linkTo='/user' iconType='add_circle' onClickButton={this.clickList}  primaryText='Texto primário' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
           </List>          
         </Drawer>        
       </div>
@@ -149,4 +140,6 @@ Header.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Header);
+const mapStateToProps = state => ({app: state.app })
+const mapDispatchToProps = dispatch => bindActionCreators({ handleDrawer }, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Header));

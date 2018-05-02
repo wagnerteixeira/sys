@@ -1,5 +1,26 @@
-body {
+html {
+  height: 100%;
+  width: 100%;
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  overflow-x: hidden;  
+}
+
+body {
+  position: relative;  
+  /*max-height: 100%;*/
+  overflow: inherit;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: block;
+}
+
+#root {
+  position: relative;  
+  /*max-height: 100%;*/
+  overflow: inherit;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: block;
 }

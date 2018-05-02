@@ -11,28 +11,24 @@ import {fade} from 'material-ui/styles/colorManipulator'
 import spacing from 'material-ui/styles/spacing'
 import createMuiTheme from 'material-ui/styles/createMuiTheme'
 
+import { connect } from 'react-redux';
+
 import Header from './template/header';
 import Footer from './template/footer'
+import Main from './config/routes'
+import { withRouter } from 'react-router-dom'
 
 import IconListButton from './common/iconListButton'
 
-const styles  = theme => ({
-  root: {
-    flexGrow: 1,    
-    zIndex: 1,
-    position: 'absolute',
-    height: "100%",
-    width : "100%"
-   },   
-   content: {
-    flexGrow: 1,
+const styles = theme => ({
+  content: {    
     position: 'relative',
-    left: theme.mixins.toolbar.minHeight + 30,
-    top:`${theme.mixins.toolbar.minHeight}px`,    
-    height: "100%",
-    width: "100%"
-  },
-})
+    margin: 0,
+    overflowX: "hidden",
+    //left: theme.spacing.unit * 10,
+    top: theme.mixins.toolbar.minHeight
+   },
+});
 
 const muiTheme = createMuiTheme({
   fontFamily: 'Roboto, sans-serif',
@@ -50,26 +46,22 @@ const muiTheme = createMuiTheme({
   } 
 });
 
-
 class App extends Component {
   render() {
-    
-    const { classes } = this.props;
-    
+    console.log(this.props.app.drawerOpen)
+    const { classes, theme } = this.props;    
      return (
       <MuiThemeProvider theme={muiTheme}>
-       <div className={classes.root}  >      
-          <Header theme={muiTheme}/>   
-          <main className={classes.content}>
-              <h1>TESTE</h1>
-              <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
-          </main>       
-          <Footer />
-      </div>
-      </MuiThemeProvider>
+        <Header theme={muiTheme}/>     
+        <div className={classes.content} style={{left: !this.props.app.drawerOpen ? theme.spacing.unit * 10 : theme.spacing.unit * 39 }}>
+          <Main /> 
+        </div>                       
+        <Footer />
+      </MuiThemeProvider>      
     );
   }
 }
 
-export default withStyles(styles)(App);
+const mapStateToProps = state => ({app: state.app })
+export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(App)));
 
