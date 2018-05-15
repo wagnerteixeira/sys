@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 
 import Header from './template/header';
 import Footer from './template/footer'
-import Main from './config/routes'
+import Main from './config/main'
 import { withRouter } from 'react-router-dom'
 
 import IconListButton from './common/iconListButton'
@@ -26,7 +26,7 @@ const styles = theme => ({
     margin: 0,
     overflowX: "hidden",
     //left: theme.spacing.unit * 10,
-    top: theme.mixins.toolbar.minHeight
+    top: theme.mixins.toolbar.minHeight + 10
    },
 });
 
@@ -53,7 +53,7 @@ class App extends Component {
      return (
       <MuiThemeProvider theme={muiTheme}>
         <Header theme={muiTheme}/>     
-        <div className={classes.content} style={{left: !this.props.app.drawerOpen ? theme.spacing.unit * 10 : theme.spacing.unit * 39 }}>
+        <div className={classes.content} style={{left: !this.props.app.drawerOpen ? (theme.spacing.unit * 9) + 4  : theme.spacing.unit * 39 }}>
           <Main /> 
         </div>                       
         <Footer />

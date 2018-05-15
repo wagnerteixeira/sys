@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
+import ContentHeader from '../../template/contentHeader'
+
 class Product extends Component {
     
     render() {
-        return (
-            <h1>Cadastro de Produtos</h1>        
+        return (            
+            <ContentHeader title='Produtos' small='Cadastro' />      
         )
     }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Product from '../ui/products/product'
-import User from '../ui/products/user'
+import User from '../ui/users/user'
 
 export default props => (    
     <main>
