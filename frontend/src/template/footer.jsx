@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
 
 const styles = theme => ({
   root: {
-    zIndex: 1,    
+    zIndex: 9999999,    
     flexGrow: 1,
     //height:`${theme.mixins.toolbar.minHeight}px`,
     height: theme.spacing.unit * 3,

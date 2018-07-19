@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import List from 'material-ui/List';
-import Typography from 'material-ui/Typography';
-import Divider from 'material-ui/Divider';
-import IconButton from 'material-ui/IconButton';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-import Icon from 'material-ui/Icon';
+import Icon from '@material-ui/core/Icon';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,7 +26,6 @@ const drawerWidth = 300;
 const styles = theme => ({
   root: {
     flexGrow: 1,    
-    zIndex: 1,
     overflow: 'hidden',
     position: 'absolute',
     display: 'flex',
@@ -127,7 +126,7 @@ class Header extends React.Component {
           <List>
             <IconListButton linkTo='/' iconType='insert_drive_file' onClickButton={this.clickList} primaryText='Cadastros de Produtos' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
             <IconListButton linkTo='/user' iconType='person' onClickButton={this.clickList}  primaryText='Cadastro de Usuários' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/> 
-            <IconListButton linkTo='/user' iconType='add_circle' onClickButton={this.clickList}  primaryText='Texto primário' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
+            <IconListButton linkTo='/uploadSinapi' iconType='add_circle' onClickButton={this.clickList}  primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
           </List>          
         </Drawer>        
       </div>

@@ -1,15 +1,15 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import {grey, blueGrey} from 'material-ui/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Typography from 'material-ui/Typography';
+import {grey, blueGrey} from '@material-ui/core/colors';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import Typography from '@material-ui/core/Typography';
 
-import {fade} from 'material-ui/styles/colorManipulator'
-import spacing from 'material-ui/styles/spacing'
-import createMuiTheme from 'material-ui/styles/createMuiTheme'
+import {fade} from '@material-ui/core/styles/colorManipulator'
+import spacing from '@material-ui/core/styles/spacing'
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
 import { connect } from 'react-redux';
 
