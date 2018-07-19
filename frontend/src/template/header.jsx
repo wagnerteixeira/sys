@@ -124,9 +124,9 @@ class Header extends React.Component {
           </div>
           <Divider />
           <List>
-            <IconListButton linkTo='/' iconType='insert_drive_file' onClickButton={this.clickList} primaryText='Cadastros de Produtos' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
-            <IconListButton linkTo='/user' iconType='person' onClickButton={this.clickList}  primaryText='Cadastro de Usuários' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/> 
-            <IconListButton linkTo='/uploadSinapi' iconType='add_circle' onClickButton={this.clickList}  primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
+            <IconListButton linkTo='/' iconType='insert_drive_file' onClickButton={this.clickList} primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
+            <IconListButton linkTo='/user' iconType='person' onClickButton={this.clickList}  primaryText='Cadastro de Usuários' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>             
+            <IconListButton linkTo='/fileselector' iconType='add_circle' onClickButton={this.clickList}  primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
           </List>          
         </Drawer>        
       </div>

@@ -8,9 +8,10 @@ import FileSelector from '../ui/uploadSinapi/fileSelector'
 export default props => (    
     <main>
         <Switch>
-            <Route exact path='/' component={User} />
+            <Route exact path='/' component={UploadSinapi} />
             <Route path='/uploadSinapi' component={UploadSinapi} />        
-            <Route path='/user' component={FileSelector} />   
+            <Route path='/user' component={User} />   
+            <Route path='/fileselector' component={FileSelector} />   
             <Redirect from='*' to='/' />
         </Switch>
     </main>
