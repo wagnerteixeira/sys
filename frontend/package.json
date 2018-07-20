@@ -20,8 +20,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run clear && react-scripts build && npm run copy-build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clear" : "rm -rf /var/www/html/sinapi/build/",
+    "copy-build" : "cp -R build /var/www/html/sinapi"
   }
 }
