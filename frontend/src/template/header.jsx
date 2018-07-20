@@ -89,7 +89,6 @@ class Header extends React.Component {
   
   render() {
     const { classes, theme } = this.props;
-    console.log(theme)    
     return (
       <div className={classes.root}>
         <AppBar
