@@ -27,7 +27,6 @@ const styles = theme => ({
 
 function Footer(props) {
   const { classes, theme } = props;
-  console.log(theme.spacing.unit)
   return (    
     <footer className={classes.root}>      
         <Typography className={classes.typography} align="center" variant="caption" color="inherit">          

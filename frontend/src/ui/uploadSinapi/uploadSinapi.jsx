@@ -66,7 +66,6 @@ class UploadSinapi extends Component {
 
     render() {
         const { classes } = this.props; 
-        console.log(this.state.selectedFile)
         return (
             <div>   
                 <h1>Upload Arquivo SINAPI</h1>

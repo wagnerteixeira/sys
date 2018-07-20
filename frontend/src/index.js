@@ -12,7 +12,8 @@ import registerServiceWorker from './registerServiceWorker'
 import reducers from './config/reducers'
 import App from './App'
 //import AuthOrApp from './authOrApp'
-
+import config from './consts/config'
+console.log(config)
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(
     applyMiddleware(promise, multi, thunk)

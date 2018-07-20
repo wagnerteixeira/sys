@@ -48,7 +48,6 @@ const muiTheme = createMuiTheme({
 
 class App extends Component {
   render() {
-    console.log(this.props.app.drawerOpen)
     const { classes, theme } = this.props;    
      return (
       <MuiThemeProvider theme={muiTheme}>
