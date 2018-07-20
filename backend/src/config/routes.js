@@ -18,6 +18,8 @@ module.exports = function(server){
 
     const UserService = require('../api/services/userService')
     UserService.register(protectedApi, '/user')
+
+    
     /*
      * Rotas Abertas
      */
@@ -28,6 +30,10 @@ module.exports = function(server){
     openApi.post('/login', AuthService.login)
     //openApi.post('/signUp', AuthService.signUp)
     openApi.post('/validateToken', AuthService.validateToken)
+    require('../api/services/sinapiFileUpload')(openApi)
+
+  //  const SinapiService = require('../api/services/sinapiService')
+  //  SinapiService.register(openApi, '/sinapi')
 
     console.log("ROTAS:\n")
     expressListRoutes({ prefix: '/api' }, 'Protected API:', protectedApi)

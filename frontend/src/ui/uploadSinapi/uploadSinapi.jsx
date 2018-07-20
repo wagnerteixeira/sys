@@ -7,6 +7,9 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 import AttachFile from '@material-ui/icons/AttachFile';
+import configUrl from '../../consts/config';
+
+import axios, { post } from 'axios';
 
 
 const styles = theme => ({
@@ -27,18 +30,38 @@ const styles = theme => ({
 
 
 class UploadSinapi extends Component {
-    state = {selectedFile: null}
+    constructor(props) {
+        super(props);
+        this.state = {selectedFile: null}
+        this.uploadHandler = this.uploadHandler.bind(this)
+        this.fileChangedHandler = this.fileChangedHandler.bind(this)
+        this.noChange = this.noChange.bind(this);
+      }
 
     fileChangedHandler = (event) => {
         this.setState({selectedFile: event.target.files[0]})
     }
 
     uploadHandler = () => { 
-        console.log(this.state.selectedFile)
+        console.log(this.state.selectedFile);
+        if (this.state.selectedFile)        
+          this.fileUpload(this.state.selectedFile)
     }
 
     noChange() {
 
+    }
+
+    fileUpload(file){
+        const url = configUrl.OPEN_API_URL + '/fileUpload';
+        const formData = new FormData();
+        formData.append('file',file)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return  post(url, formData, config)
     }
 
     render() {
@@ -67,7 +90,7 @@ class UploadSinapi extends Component {
                     <Input id="name-disabled" value={this.state.selectedFile ? this.state.selectedFile.name : ''} />
                 </FormControl>
                 <br />
-                <Button variant="extendedFab" className={classes.marginUnit}>
+                <Button variant="extendedFab" className={classes.marginUnit} onClick={this.uploadHandler}>
                     <CloudUpload className={classes.extendedIcon} />
                     Processar Arquivo
                 </Button>  
