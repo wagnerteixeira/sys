@@ -8,6 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 import AttachFile from '@material-ui/icons/AttachFile';
 import configUrl from '../../consts/config';
+import ResponsiveDialog from '../../common/alertDialog'
 
 import axios, { post } from 'axios';
 
@@ -32,20 +33,26 @@ const styles = theme => ({
 class UploadSinapi extends Component {
     constructor(props) {
         super(props);
-        this.state = {selectedFile: null}
+        this.state = {selectedFile: null, alertSendOpen : false, alertNoFileOpen : false}
         this.uploadHandler = this.uploadHandler.bind(this)
         this.fileChangedHandler = this.fileChangedHandler.bind(this)
         this.noChange = this.noChange.bind(this);
       }
 
     fileChangedHandler = (event) => {
-        this.setState({selectedFile: event.target.files[0]})
+        console.log(this.state)
+        this.setState({...this.state, selectedFile: event.target.files[0]})
+        console.log(this.state)
     }
 
     uploadHandler = () => { 
         console.log(this.state.selectedFile);
-        if (this.state.selectedFile)        
+        if (this.state.selectedFile) {
           this.fileUpload(this.state.selectedFile)
+          this.setState({...this.state, selectedFile: null, alertSendOpen: true})
+        }
+        else 
+            this.setState({...this.state, alertNoFileOpen: true})
     }
 
     noChange() {
@@ -93,6 +100,8 @@ class UploadSinapi extends Component {
                     <CloudUpload className={classes.extendedIcon} />
                     Processar Arquivo
                 </Button>  
+                <ResponsiveDialog text='Arquivo enviado com sucesso!' headerText='Enviado com sucesso!' open={this.state.alertSendOpen} />
+                <ResponsiveDialog text='Por favor elecione um arquivo!' headerText='Selecione um arquivo' open={this.state.alertNoFileOpen} />
                 <br /> 
             </div>
         )
