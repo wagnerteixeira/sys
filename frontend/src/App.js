@@ -11,8 +11,6 @@ import {fade} from '@material-ui/core/styles/colorManipulator'
 import spacing from '@material-ui/core/styles/spacing'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
-import { connect } from 'react-redux';
-
 import Header from './template/header';
 import Footer from './template/footer'
 import Main from './config/main'
@@ -47,12 +45,22 @@ const muiTheme = createMuiTheme({
 });
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = { drawerOpen : false}
+    this.handleDrawer = this.handleDrawer.bind(this)
+  }
+
+  handleDrawer(open){
+    this.setState({...this.state, drawerOpen : open})
+  }
+  
   render() {
     const { classes, theme } = this.props;    
      return (
-      <MuiThemeProvider theme={muiTheme}>
-        <Header theme={muiTheme}/>     
-        <div className={classes.content} style={{left: !this.props.app.drawerOpen ? (theme.spacing.unit * 9) + 4  : theme.spacing.unit * 39 }}>
+      <MuiThemeProvider theme={muiTheme} >
+        <Header theme={muiTheme} drawerOpen={this.state.drawerOpen} handleDrawer={this.handleDrawer}/>     
+        <div className={classes.content} style={{left: !this.state.drawerOpen ? (theme.spacing.unit * 9) + 4  : theme.spacing.unit * 39 }}>
           <Main /> 
         </div>                       
         <Footer />
@@ -61,6 +69,7 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({app: state.app })
-export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(App)));
+export default withRouter(withStyles(styles, { withTheme: true })(App));
+
+
 

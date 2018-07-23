@@ -19,7 +19,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import IconListButton from '../common/iconListButton'
-import { handleDrawer } from '../template/appActions'
 
 const drawerWidth = 300;
 
@@ -88,19 +87,19 @@ const styles = theme => ({
 class Header extends React.Component {
   
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, drawerOpen } = this.props;
     return (
       <div className={classes.root}>
         <AppBar
           position="absolute"
-          className={classNames(classes.appBar, this.props.app.drawerOpen && classes.appBarShift)}
+          className={classNames(classes.appBar, drawerOpen && classes.appBarShift)}
         >
-          <Toolbar disableGutters={!this.props.app.drawerOpen}>
+          <Toolbar disableGutters={!drawerOpen}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={() => this.props.handleDrawer(true)}
-              className={classNames(classes.menuButton, this.props.app.drawerOpen && classes.hide)}
+              className={classNames(classes.menuButton, drawerOpen && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
@@ -112,9 +111,9 @@ class Header extends React.Component {
         <Drawer 
           variant="permanent"
           classes={{
-            paper: classNames(classes.drawerPaper, !this.props.app.drawerOpen && classes.drawerPaperClose),
+            paper: classNames(classes.drawerPaper, !drawerOpen && classes.drawerPaperClose),
           }}
-          open={this.props.app.drawerOpen}
+          open={drawerOpen}
         >
           <div className={classes.toolbar}>
             <IconButton onClick={() => this.props.handleDrawer(false) } color="inherit">
@@ -123,9 +122,9 @@ class Header extends React.Component {
           </div>
           <Divider />
           <List>
-            <IconListButton linkTo='/' iconType='insert_drive_file' onClickButton={this.clickList} primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
-            <IconListButton linkTo='/user' iconType='person' onClickButton={this.clickList}  primaryText='Cadastro de Usuários' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>             
-            <IconListButton linkTo='/fileselector' iconType='add_circle' onClickButton={this.clickList}  primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
+            <IconListButton linkTo='/' iconType='insert_drive_file' onClickButton={this.clickList} primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={drawerOpen}/>
+            <IconListButton linkTo='/user' iconType='person' onClickButton={this.clickList}  primaryText='Cadastro de Usuários' listItemClassName={classes.listItemClassName} hideItemText={drawerOpen}/>             
+            <IconListButton linkTo='/fileselector' iconType='add_circle' onClickButton={this.clickList}  primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={drawerOpen}/>
           </List>          
         </Drawer>        
       </div>
@@ -136,8 +135,8 @@ class Header extends React.Component {
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  drawerOpen: PropTypes.bool.isRequired,
+  handleDrawer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({app: state.app })
-const mapDispatchToProps = dispatch => bindActionCreators({ handleDrawer }, dispatch)
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Header));
+export default withStyles(styles, { withTheme: true })(Header);
