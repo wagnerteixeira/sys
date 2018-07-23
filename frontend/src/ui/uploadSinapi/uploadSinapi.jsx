@@ -37,16 +37,15 @@ class UploadSinapi extends Component {
         this.uploadHandler = this.uploadHandler.bind(this)
         this.fileChangedHandler = this.fileChangedHandler.bind(this)
         this.noChange = this.noChange.bind(this);
+        this.handleCloseAlertNoFile = this.handleCloseAlertNoFile.bind(this)
+        this.handleCloseAlertSend = this.handleCloseAlertSend.bind(this)
       }
 
     fileChangedHandler = (event) => {
-        console.log(this.state)
         this.setState({...this.state, selectedFile: event.target.files[0]})
-        console.log(this.state)
     }
 
     uploadHandler = () => { 
-        console.log(this.state.selectedFile);
         if (this.state.selectedFile) {
           this.fileUpload(this.state.selectedFile)
           this.setState({...this.state, selectedFile: null, alertSendOpen: true})
@@ -57,6 +56,14 @@ class UploadSinapi extends Component {
 
     noChange() {
 
+    }
+
+    handleCloseAlertSend() {
+        this.setState({...this.state, alertSendOpen: false}) 
+    }
+
+    handleCloseAlertNoFile() {
+        this.setState({...this.state, alertNoFileOpen: false}) 
     }
 
     fileUpload(file){
@@ -100,8 +107,18 @@ class UploadSinapi extends Component {
                     <CloudUpload className={classes.extendedIcon} />
                     Processar Arquivo
                 </Button>  
-                <ResponsiveDialog text='Arquivo enviado com sucesso!' headerText='Enviado com sucesso!' open={this.state.alertSendOpen} />
-                <ResponsiveDialog text='Por favor elecione um arquivo!' headerText='Selecione um arquivo' open={this.state.alertNoFileOpen} />
+                <ResponsiveDialog 
+                    text='Arquivo processado com sucesso!' 
+                    headerText='Processado com sucesso!' 
+                    open={this.state.alertSendOpen} 
+                    handleClose={this.handleCloseAlertSend}
+                />
+                <ResponsiveDialog 
+                    text='Por favor elecione um arquivo!' 
+                    headerText='Selecione um arquivo' 
+                    open={this.state.alertNoFileOpen} 
+                    handleClose={this.handleCloseAlertNoFile}
+                />
                 <br /> 
             </div>
         )

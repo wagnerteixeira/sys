@@ -26,7 +26,7 @@
     "build": "npm run clear && react-scripts build && npm run copy-build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "clear" : "rm -rf /var/www/html/sinapi/build/",
-    "copy-build" : "cp -R build /var/www/html/sinapi"
+    "clear": "rm -rf /var/www/html/sinapi/build/",
+    "copy-build": "cp -R build /var/www/html/sinapi"
   }
 }

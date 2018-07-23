@@ -13,22 +13,18 @@ class ResponsiveDialog extends React.Component {
     open: false,
   };
 
-  handleClose = () => {
-    this.setState({open: false});
-  };
-
   componentWillReceiveProps(newProps) {
     this.setState({open: newProps.open});
   }
 
   render() {
-    const { text, headerText } = this.props;
+    const { text, headerText, handleClose } = this.props;
     return (
       <div>
         <Dialog
           fullScreen={false}
           open={this.state.open}
-          onClose={this.handleClose}
+          onClose={() => handleClose()}
           aria-labelledby="responsive-dialog-title"
         >
           <DialogTitle id="responsive-dialog-title">{headerText}</DialogTitle>
@@ -38,7 +34,7 @@ class ResponsiveDialog extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={() => handleClose()} color="primary">
               Fechar
             </Button>
           </DialogActions>
@@ -52,6 +48,7 @@ ResponsiveDialog.propTypes = {
   text: PropTypes.string.isRequired,
   headerText: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired
 };
 
 export default withMobileDialog()(ResponsiveDialog);
