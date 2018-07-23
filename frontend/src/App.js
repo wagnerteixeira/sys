@@ -1,14 +1,10 @@
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import {grey, blueGrey} from '@material-ui/core/colors';
+import { blueGrey } from '@material-ui/core/colors';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import Typography from '@material-ui/core/Typography';
 
-import {fade} from '@material-ui/core/styles/colorManipulator'
-import spacing from '@material-ui/core/styles/spacing'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
 import { connect } from 'react-redux';
@@ -17,8 +13,6 @@ import Header from './template/header';
 import Footer from './template/footer'
 import Main from './config/main'
 import { withRouter } from 'react-router-dom'
-
-import IconListButton from './common/iconListButton'
 
 const styles = theme => ({
   content: {    

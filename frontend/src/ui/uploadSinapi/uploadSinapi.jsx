@@ -10,7 +10,7 @@ import AttachFile from '@material-ui/icons/AttachFile';
 import configUrl from '../../consts/config';
 import ResponsiveDialog from '../../common/alertDialog'
 
-import axios, { post } from 'axios';
+import  { post } from 'axios';
 
 
 const styles = theme => ({

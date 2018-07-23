@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import classNames from 'classnames';
 
 const styles = theme => ({
   root: {
@@ -26,7 +23,7 @@ const styles = theme => ({
 });
 
 function Footer(props) {
-  const { classes, theme } = props;
+  const { classes } = props;
   return (    
     <footer className={classes.root}>      
         <Typography className={classes.typography} align="center" variant="caption" color="inherit">          

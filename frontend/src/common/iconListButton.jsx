@@ -6,18 +6,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import { Link } from 'react-router-dom'
 
-import If from '../operator/if'
-
 export default props => (
   <Link to={props.linkTo} style={{textDecoration: 'none'}} >
     <ListItem href={props.linkTo} button className={props.listItemClassName} onClick={props.onClickButton}>
-      <ListItemIcon >
-        <Icon  color="primary" style={{ fontSize: props.iconFontSize || 30 }}>{props.iconType}</Icon>
-      </ListItemIcon>      
-      <ListItemText primary={props.primaryText} secondary={props.secondaryText} style={{ whiteSpace : "nowrap" }} />  
+      <Icon  color="primary" className={props.iconClassName} >{props.iconType}</Icon>   
+      <ListItemText color="primary" className={props.listItemTextClassName} primary={props.primaryText} secondary={props.secondaryText} />  
     </ListItem>  
   </Link>
 )
-
-//<If test={props.hideItemText}>
-//</If>  

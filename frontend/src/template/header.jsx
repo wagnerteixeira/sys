@@ -10,10 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-import Icon from '@material-ui/core/Icon';
+
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -48,8 +47,30 @@ const styles = theme => ({
     }),
   },
   menuButton: {
-    marginLeft: 12,
-    marginRight: 36,
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+  },
+  typographyDawerOpen: {
+    marginLeft: theme.spacing.unit * 2,
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: theme.spacing.unit * 5,
+    },
+  },
+  iconClassName: {
+    fontSize: 35
+  },
+  listItemClassName: {
+    paddingLeft: theme.spacing.unit * 1,
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: theme.spacing.unit * 0.5,
+      marginTop: -10
+    },
+  },
+  listItemTextClassName : {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
   hide: {
     display: 'none',
@@ -69,9 +90,9 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: theme.spacing.unit * 7,
+    width: theme.spacing.unit * 5,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
+      width: theme.spacing.unit * 6,
     },
   },
   toolbar: {
@@ -104,8 +125,8 @@ class Header extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              Mini variant drawer
+            <Typography className={classes.typographyDawerOpen} variant="title" color="inherit" noWrap>
+              Orçamentos
             </Typography>
           </Toolbar>
         </AppBar>
@@ -118,14 +139,38 @@ class Header extends React.Component {
         >
           <div className={classes.toolbar}>
             <IconButton onClick={() => this.props.handleDrawer(false) } color="inherit">
-               <Icon color="inherit">chevron_left</Icon>
+               <ChevronLeft />
             </IconButton>
           </div>
           <Divider />
           <List>
-            <IconListButton linkTo='/' iconType='insert_drive_file' onClickButton={this.clickList} primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
-            <IconListButton linkTo='/user' iconType='person' onClickButton={this.clickList}  primaryText='Cadastro de Usuários' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>             
-            <IconListButton linkTo='/fileselector' iconType='add_circle' onClickButton={this.clickList}  primaryText='Adicionar arquivo SINAPI' listItemClassName={classes.listItemClassName} hideItemText={this.props.app.drawerOpen}/>
+            <IconListButton 
+              linkTo='/' 
+              iconType='insert_drive_file' 
+              onClickButton={this.clickList} 
+              primaryText='Adicionar arquivo SINAPI'               
+              listItemClassName={classes.listItemClassName} 
+              iconClassName={classes.iconClassName}
+              listItemTextClassName={classes.listItemTextClassName}
+            />
+            <IconListButton 
+              linkTo='/user' 
+              iconType='person' 
+              onClickButton={this.clickList}  
+              primaryText='Cadastro de Usuários' 
+              listItemClassName={classes.listItemClassName} 
+              iconClassName={classes.iconClassName}
+              listItemTextClassName={classes.listItemTextClassName}
+            />             
+            <IconListButton 
+              linkTo='/fileselector' 
+              iconType='add_circle' 
+              onClickButton={this.clickList}  
+              primaryText='Adicionar arquivo SINAPI' 
+              listItemClassName={classes.listItemClassName} 
+              iconClassName={classes.iconClassName}
+              listItemTextClassName={classes.listItemTextClassName}
+            />
           </List>          
         </Drawer>        
       </div>
