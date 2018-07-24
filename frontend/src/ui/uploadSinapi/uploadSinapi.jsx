@@ -33,37 +33,75 @@ const styles = theme => ({
 class UploadSinapi extends Component {
     constructor(props) {
         super(props);
-        this.state = {selectedFile: null, alertSendOpen : false, alertNoFileOpen : false}
+       this.state = {selectedFile: null, 
+                    dialogOpen : false, 
+                    headerTextDialog: '',
+                    textDialog : ''}
         this.uploadHandler = this.uploadHandler.bind(this)
         this.fileChangedHandler = this.fileChangedHandler.bind(this)
         this.noChange = this.noChange.bind(this);
-        this.handleCloseAlertNoFile = this.handleCloseAlertNoFile.bind(this)
-        this.handleCloseAlertSend = this.handleCloseAlertSend.bind(this)
+        this.handleCloseDialog = this.handleCloseDialog.bind(this)
       }
 
     fileChangedHandler = (event) => {
         this.setState({...this.state, selectedFile: event.target.files[0]})
     }
 
+    getTextDialogNoSelectFile(){
+        return { 
+                textDialog: 'Por favor selecione um arquivo!', 
+                headerTextDialog : 'Selecione um arquivo',
+                dialogOpen : true
+            }
+    }
+
+    getTextDialogSendingFile(){
+        return { 
+                textDialog: 'Agurrde um momento, enviando arquivo', 
+                headerTextDialog : 'Aguarde...',
+                dialogOpen : true
+            }
+    }
+
+    getTextDialogSuccessSend(){
+        return { 
+                textDialog: 'Arquivo enviado com sucesso!', 
+                headerTextDialog : 'Enviado com sucesso!',
+                dialogOpen : true
+            }
+    }
+
+    getTextDialogErrorSend(error){
+        return { 
+                textDialog: 'Erro ao enviar arquivo: ' + error, 
+                headerTextDialog : 'Erro',
+                dialogOpen : true
+            }
+    }
+
     uploadHandler = () => { 
+        this.getTextDialogSuccessSend()
         if (this.state.selectedFile) {
-          this.fileUpload(this.state.selectedFile)
-          this.setState({...this.state, selectedFile: null, alertSendOpen: true})
+            this.setState({...this.state, ...this.getTextDialogSendingFile()})
+            this.fileUpload(this.state.selectedFile).then(() => {
+                this.setState({...this.state, selectedFile: null, ...this.getTextDialogSuccessSend()})
+            }).catch(e => { 
+                console.log(e)                
+                this.setState({...this.state, ...this.getTextDialogErrorSend(e.message)})
+            });    
         }
         else 
-            this.setState({...this.state, alertNoFileOpen: true})
+            this.setState({...this.state, ...this.getTextDialogNoSelectFile()})
+                          
     }
 
     noChange() {
 
-    }
+    } 
 
-    handleCloseAlertSend() {
-        this.setState({...this.state, alertSendOpen: false}) 
-    }
 
-    handleCloseAlertNoFile() {
-        this.setState({...this.state, alertNoFileOpen: false}) 
+    handleCloseDialog() {
+        this.setState({...this.state, dialogOpen: false}) 
     }
 
     fileUpload(file){
@@ -108,16 +146,10 @@ class UploadSinapi extends Component {
                     Processar Arquivo
                 </Button>  
                 <ResponsiveDialog 
-                    text='Arquivo processado com sucesso!' 
-                    headerText='Processado com sucesso!' 
-                    open={this.state.alertSendOpen} 
-                    handleClose={this.handleCloseAlertSend}
-                />
-                <ResponsiveDialog 
-                    text='Por favor elecione um arquivo!' 
-                    headerText='Selecione um arquivo' 
-                    open={this.state.alertNoFileOpen} 
-                    handleClose={this.handleCloseAlertNoFile}
+                    text={this.state.textDialog} 
+                    headerText={this.state.headerTextDialog} 
+                    open={this.state.dialogOpen} 
+                    handleClose={this.handleCloseDialog}
                 />
                 <br /> 
             </div>
