@@ -38,5 +38,3 @@ Footer.propTypes = {
 };
 
 export default withStyles(styles, { withTheme: true })(Footer);
-
-//classes={{colorPrimary :  classes.colorPrimary}}
