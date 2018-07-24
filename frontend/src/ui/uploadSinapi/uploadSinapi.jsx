@@ -36,7 +36,8 @@ class UploadSinapi extends Component {
        this.state = {selectedFile: null, 
                     dialogOpen : false, 
                     headerTextDialog: '',
-                    textDialog : ''}
+                    textDialog : '',
+                    showDialogClose: true}
         this.uploadHandler = this.uploadHandler.bind(this)
         this.fileChangedHandler = this.fileChangedHandler.bind(this)
         this.noChange = this.noChange.bind(this);
@@ -51,14 +52,16 @@ class UploadSinapi extends Component {
         return { 
                 textDialog: 'Por favor selecione um arquivo!', 
                 headerTextDialog : 'Selecione um arquivo',
+                showDialogClose : true,
                 dialogOpen : true
             }
     }
 
     getTextDialogSendingFile(){
         return { 
-                textDialog: 'Agurrde um momento, enviando arquivo', 
+                textDialog: 'Aguarde um momento, enviando arquivo', 
                 headerTextDialog : 'Aguarde...',
+                showDialogClose : false,
                 dialogOpen : true
             }
     }
@@ -67,6 +70,7 @@ class UploadSinapi extends Component {
         return { 
                 textDialog: 'Arquivo enviado com sucesso!', 
                 headerTextDialog : 'Enviado com sucesso!',
+                showDialogClose : true,
                 dialogOpen : true
             }
     }
@@ -75,6 +79,7 @@ class UploadSinapi extends Component {
         return { 
                 textDialog: 'Erro ao enviar arquivo: ' + error, 
                 headerTextDialog : 'Erro',
+                showDialogClose : true,
                 dialogOpen : true
             }
     }
@@ -149,6 +154,7 @@ class UploadSinapi extends Component {
                     text={this.state.textDialog} 
                     headerText={this.state.headerTextDialog} 
                     open={this.state.dialogOpen} 
+                    showClose={this.state.showDialogClose}
                     handleClose={this.handleCloseDialog}
                 />
                 <br /> 

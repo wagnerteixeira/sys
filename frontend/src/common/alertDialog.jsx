@@ -7,36 +7,30 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
+import If from '../common/if'
 
 class ResponsiveDialog extends React.Component {
-  state = {
-    open: false,
-  };
-
-  componentWillReceiveProps(newProps) {
-    this.setState({open: newProps.open});
-  }
-
-  render() {
-    const { text, headerText, handleClose } = this.props;
+  render() {  
     return (
       <div>
         <Dialog
           fullScreen={false}
-          open={this.state.open}
-          onClose={() => handleClose()}
+          open={this.props.open}
+          onClose={() => this.props.handleClose()}
           aria-labelledby="responsive-dialog-title"
         >
-          <DialogTitle id="responsive-dialog-title">{headerText}</DialogTitle>
+          <DialogTitle id="responsive-dialog-title">{this.props.headerText}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {text}
+              {this.props.text}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => handleClose()} color="primary">
-              Fechar
-            </Button>
+            <If test={this.props.showClose} >
+              <Button onClick={() => this.props.handleClose()} color="primary">
+                Fechar
+              </Button>
+            </If>
           </DialogActions>
         </Dialog>
       </div>
