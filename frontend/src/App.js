@@ -9,10 +9,12 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
 import { connect } from 'react-redux';
 
+import { withRouter } from 'react-router-dom'
+
 import Header from './template/header';
 import Footer from './template/footer'
 import Main from './config/main'
-import { withRouter } from 'react-router-dom'
+
 
 const styles = theme => ({
   content: {    
